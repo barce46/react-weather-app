@@ -1,6 +1,8 @@
-const setWeather = (state, { weather }) => {
-  state.weatherData = weather;
-  return { ...state }
+const setWeather = (state, { weatherData }) => {
+  return {
+    ...state,
+    weatherData
+  }
 };
 
 const actions = {

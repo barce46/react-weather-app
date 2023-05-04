@@ -2,7 +2,7 @@ import { TextInput } from '@mantine/core';
 import { GoSearch } from "react-icons/go";
 import { useState } from 'react';
 import useWeatherContext from '../hooks/use-weather-context';
-import { setWeather } from '../utils/dataHandlers';
+import { getAndDispatchWeather } from '../utils/dataHandlers';
 
 export default function SearchBar() {
   const [city, setCity] = useState('');
@@ -10,7 +10,7 @@ export default function SearchBar() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setWeather(dispatch, city);
+    getAndDispatchWeather(dispatch, city);
   };
 
   return (

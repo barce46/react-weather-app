@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import useWeatherContext from '../hooks/use-weather-context';
 import { Grid } from '@mantine/core';
-import { setWeather } from '../utils/dataHandlers';
+import { getAndDispatchWeather } from '../utils/dataHandlers';
 
 
 function ForecastWeather() {
   const [{ weatherData }, dispatch] = useWeatherContext();
 
   useEffect(() => {
-    setWeather(dispatch);
+    getAndDispatchWeather(dispatch);
   }, [dispatch])
 
   //const forcestData = async () => { await weatherData }
