@@ -1,11 +1,17 @@
+import { useEffect } from 'react';
 import useWeatherContext from '../hooks/use-weather-context';
 import { Grid } from '@mantine/core';
+import { setWeather } from '../utils/dataHandlers';
 
 
 function ForecastWeather() {
-  const { weatherData } = useWeatherContext();
+  const [{ weatherData }, dispatch] = useWeatherContext();
 
-  const forcestData = async () => { await weatherData }
+  useEffect(() => {
+    setWeather(dispatch);
+  }, [])
+
+  //const forcestData = async () => { await weatherData }
 
 
 
@@ -26,12 +32,12 @@ function ForecastWeather() {
         <Grid.Col span={8}>
           <div>
             <h2>Current weather:</h2>
-            {weatherData.location && (
+            {weatherData?.location && (
               <div>
-                <h3>{weatherData.location.name}, {weatherData.location.country}</h3>
-                <img src={weatherData.current.condition.icon} alt="Weather icon" />
-                <p>{weatherData.current.condition.text}</p>
-                <p>{weatherData.current.temp_c}°C</p>
+                <h3>{weatherData?.location.name}, {weatherData?.location.country}</h3>
+                <img src={weatherData?.current.condition.icon} alt="Weather icon" />
+                <p>{weatherData?.current.condition.text}</p>
+                <p>{weatherData?.current.temp_c}°C</p>
               </div>
             )}
           </div>

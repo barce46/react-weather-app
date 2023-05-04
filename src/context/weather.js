@@ -1,31 +1,11 @@
-import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useReducer } from 'react';
 
 const weatherContext = createContext();
 
-export const Provider = ({ children }) => {
-  const [weatherData, setWeatherData] = useState({});
-
-  useEffect(() => {
-    async function getData() {
-      const response = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=a412e9ccbd484e09a7c45733230305&q=Budapest&days=10&aqi=no&alerts=no`);
-      setWeatherData(response.data);
-    }
-    getData();
-  }, []);
-
-  const weatherDataFromSearch = async (city) => {
-    const response = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=a412e9ccbd484e09a7c45733230305&q=${city}&days=10&aqi=no&alerts=no`);
-    setWeatherData(response.data);
-  };
-
-  const valueToShare = {
-    weatherDataFromSearch,
-    weatherData,
-  };
-
+export const Provider = ({ reducer, initialState, children }) => {
+  const contextValue = useReducer(reducer, initialState)
   return (
-    <weatherContext.Provider value={valueToShare}>
+    <weatherContext.Provider value={contextValue}>
       {children}
     </weatherContext.Provider>
   );
