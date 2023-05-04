@@ -9,7 +9,7 @@ function ForecastWeather() {
 
   useEffect(() => {
     setWeather(dispatch);
-  }, [])
+  }, [dispatch])
 
   //const forcestData = async () => { await weatherData }
 
